@@ -1,11 +1,11 @@
 package com.gianni.petclinic.services.map;
 
 import com.gianni.petclinic.model.Pet;
-import com.gianni.petclinic.services.CrudService;
+import com.gianni.petclinic.services.PetService;
 
 import java.util.Set;
 
-public class PetServiceMap extends AbstractMapService<Pet, Long> implements CrudService<Pet, Long> {
+public class PetServiceMap extends AbstractMapService<Pet, Long> implements PetService {
     @Override
     public Set<Pet> findAll() {
         return super.findAll();
