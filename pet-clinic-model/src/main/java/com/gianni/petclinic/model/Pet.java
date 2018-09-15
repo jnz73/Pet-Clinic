@@ -2,18 +2,27 @@ package com.gianni.petclinic.model;
 
 import java.time.LocalDate;
 
-public class Pet extends BaseEntity{
+public class Pet extends BaseEntity {
 
-    private PetType type;
+    private String name;
+    private PetType petType;
     private Owner owner;
     private LocalDate birthdate;
 
-    public PetType getType() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(PetType type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public PetType getPetType() {
+        return petType;
+    }
+
+    public void setPetType(PetType petType) {
+        this.petType = petType;
     }
 
     public Owner getOwner() {
