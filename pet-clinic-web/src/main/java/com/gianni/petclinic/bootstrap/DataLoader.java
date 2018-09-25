@@ -1,10 +1,7 @@
 package com.gianni.petclinic.bootstrap;
 
 import com.gianni.petclinic.model.*;
-import com.gianni.petclinic.services.OwnerService;
-import com.gianni.petclinic.services.PetTypeService;
-import com.gianni.petclinic.services.SpecialityService;
-import com.gianni.petclinic.services.VetService;
+import com.gianni.petclinic.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,12 +14,14 @@ public class DataLoader implements CommandLineRunner {
     private final VetService vetService;
     private final PetTypeService petTypeService;
     private final SpecialityService specialityService;
+    private final VisitService visitService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialityService specialityService, VisitService visitService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
         this.specialityService = specialityService;
+        this.visitService = visitService;
     }
 
     @Override
@@ -77,6 +76,21 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("Loaded Owners...");
 
+        Visit catVisit = new Visit();
+        catVisit.setPet(fionaPet);
+        catVisit.setDate(LocalDate.now());
+        catVisit.setDescription("cold");
+        visitService.save(catVisit);
+
+        Visit dogVisit = new Visit();
+        dogVisit.setPet(michaelPet);
+        dogVisit.setDate(LocalDate.now());
+        dogVisit.setDescription("sneezing");
+        visitService.save(dogVisit);
+
+        System.out.println("Loaded Visits...");
+
+
         Speciality radiology = new Speciality();
         radiology.setDescription("Radiology");
         specialityService.save(radiology);
@@ -88,7 +102,7 @@ public class DataLoader implements CommandLineRunner {
 
         Speciality dentistry = new Speciality();
         dentistry.setDescription("Dentistry");
-        Speciality sabedDentistry = specialityService.save(dentistry);
+        Speciality savedDentistry = specialityService.save(dentistry);
 
         System.out.println("Loaded Specialities...");
 
